@@ -1,288 +1,102 @@
-🏥 Healthcare Appointment Booking Backend
+Healthcare Appointment Booking Backend
 
-A production-ready Healthcare Appointment Booking Backend built with Node.js, Express.js, MongoDB, Redis, Docker, AWS EC2, and GitHub Actions CI/CD.
+A scalable and secure backend system for managing healthcare appointment bookings, built with modern backend technologies. This project provides APIs for patient registration, doctor management, appointment scheduling, authentication, and healthcare workflow management.
 
-This backend allows:
-
-Patient & Doctor Authentication
-Doctor Slot Management
-Appointment Booking System
-Real-time Slot Availability
-Redis Caching
-Background Cron Jobs
-Dockerized Deployment
-Automated CI/CD Pipeline
-🚀 Tech Stack
-Technology	Purpose
-Node.js	Backend Runtime
-Express.js	API Framework
-MongoDB Atlas	Database
-Mongoose	ODM
-Redis	Caching
-JWT	Authentication
-Docker	Containerization
-Docker Compose	Multi-container orchestration
-GitHub Actions	CI/CD
-AWS EC2	Cloud Deployment
-Nginx	Reverse Proxy
-Node Cron	Background Jobs
-📁 Project Structure
-src/
+🚀 Features
+🔐 JWT Authentication & Authorization
+👨‍⚕️ Doctor Management
+👤 Patient Registration & Profile Management
+📅 Appointment Booking & Scheduling
+❌ Appointment Cancellation
+⏰ Slot Availability Management
+📧 Email/Notification Support
+🛡️ Secure REST APIs
+🌐 MongoDB Database Integration
+⚡ Scalable Node.js Backend Architecture
+🛠️ Tech Stack
+Backend: Node.js, Express.js
+Database: MongoDB
+Authentication: JWT
+ODM: Mongoose
+Environment Management: dotenv
+API Testing: Postman
+📂 Project Structure
+Healthcare-Appointment-Booking-Backend/
 │
-├── config/
-│   ├── db.js
-│   └── redis.js
-│
-├── jobs/
-│   └── appointment.job.js
-│
-├── middlewares/
-│   ├── auth.middleware.js
-│   ├── error.middleware.js
-│   └── role.middleware.js
-│
-├── modules/
-│   ├── appointment/
-│   ├── auth/
-│   ├── doctor/
-│   └── user/
-│
-├── routes/
-│
-├── utils/
-│
-├── app.js
+├── controllers/        # Business logic
+├── models/             # Database schemas
+├── routes/             # API routes
+├── middleware/         # Authentication & error handling
+├── config/             # Database configuration
+├── utils/              # Utility functions
+├── services/           # Service layer logic
+├── .env                # Environment variables
+├── package.json
 └── server.js
-✨ Features
-🔐 Authentication
-JWT Access Token
-Refresh Token
-Role-based Authorization
-Secure Cookie Support
-👨‍⚕️ Doctor Features
-Create Slots
-Update Slots
-Delete Slots
-View Appointments
-View Own Slots
-🧑‍💻 Patient Features
-Register/Login
-View Available Doctors
-View Doctor Available Slots
-Book Appointment
-⚡ Smart Slot Logic
-Prevents:
-Past Slot Creation
-Overlapping Slots
-Double Booking
-Expired Slot Fetching
-Booking Already Booked Slot
-🧠 Real-Life Edge Cases Handled
-Edge Case	Solution
-Double booking	Atomic Mongo Transaction
-Expired slot fetch	endTime >= new Date()
-Overlapping slots	Validation Query
-Booked slot delete	Prevented
-Booked slot update	Prevented
-Race condition	Mongo Transactions
-Repeated API abuse	Rate Limiting
-Heavy DB load	Redis Caching
-⚡ Redis Caching
+⚙️ Installation
+1️⃣ Clone the Repository
+git clone https://github.com/chandrashekhar3337/Healthcare-Appointment-Booking-Backend.git
+2️⃣ Navigate to Project Directory
+cd Healthcare-Appointment-Booking-Backend
+3️⃣ Install Dependencies
+npm install
+4️⃣ Configure Environment Variables
 
-Implemented Redis caching for:
-
-GET /api/v1/doctor/available
-Benefits
-Faster Response
-Reduced Mongo Queries
-Better Scalability
-⏰ Cron Job
-
-Automatic background cron job:
-
-appointment.job.js
-Purpose
-Marks expired appointments
-Cleans unavailable slots logic
-
-Runs automatically in backend server.
-
-🐳 Docker Setup
-Dockerized Services
-Backend Container
-Redis Container
-📦 Environment Variables
-
-Create .env
-
-MONGO_URI=your_mongodb_uri
+Create a .env file in the root directory.
 
 PORT=5000
-
-ACCESS_TOKEN_SECRET=accessSecretKey
-ACCESS_TOKEN_EXPIRY=15m
-
-REFRESH_TOKEN_SECRET=refreshSecretKey
-REFRESH_TOKEN_EXPIRY=7d
-
-COOKIE_SECRET=myCookieSecret
-
-CORS_ORIGIN=*
-
-REDIS_HOST=redis
-REDIS_PORT=6379
-▶️ Run Locally
-Install Dependencies
-npm install
-Start Server
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+5️⃣ Run the Server
+Development Mode
 npm run dev
-🐳 Run with Docker
-Build Containers
-docker compose up --build
-Run Containers
-docker compose up
-Stop Containers
-docker compose down
-☁️ AWS EC2 Deployment
+Production Mode
+npm start
+📡 API Endpoints
+Authentication
+Method	Endpoint	Description
+POST	/api/auth/register	Register new user
+POST	/api/auth/login	Login user
+Doctors
+Method	Endpoint	Description
+GET	/api/doctors	Get all doctors
+GET	/api/doctors/:id	Get doctor by ID
+Appointments
+Method	Endpoint	Description
+POST	/api/appointments/book	Book appointment
+GET	/api/appointments	Get appointments
+DELETE	/api/appointments/:id	Cancel appointment
+🔒 Authentication
 
-Backend deployed on:
+Protected routes require JWT token in headers:
 
-AWS EC2
-Docker
-Nginx
-GitHub Actions CI/CD
-🔄 CI/CD Pipeline
+Authorization: Bearer your_token
+🧪 Testing APIs
 
-Implemented using:
+You can test APIs using:
 
-.github/workflows/ci-cd.yml
-Continuous Integration (CI)
+Postman
+Thunder Client
+Insomnia
+🌍 Future Improvements
+💳 Online Payment Integration
+📹 Video Consultation
+📱 Mobile App Support
+🔔 Real-time Notifications
+📊 Admin Dashboard & Analytics
+🤝 Contributing
 
-Automatically:
+Contributions are welcome!
 
-Install Dependencies
-Run ESLint
-Run Tests
-Validate Docker Build
-Continuous Deployment (CD)
+Fork the repository
+Create a new branch
+Commit your changes
+Push the branch
+Open a Pull Request
+📜 License
 
-On every push to main branch:
+This project is licensed under the MIT License.
 
-SSH into EC2
-Pull latest code
-Restart Docker containers
-Deploy latest backend automatically
-🔐 GitHub Secrets Used
-Secret	Description
-EC2_HOST	AWS Public IP
-EC2_USERNAME	ubuntu
-EC2_SSH_KEY	EC2 Private PEM Key
-🌐 Nginx Reverse Proxy
-
-Configured Nginx to:
-
-Forward HTTP requests
-Hide internal backend port
-Improve security
-📡 API Base URL
-http://your-ip/api/v1
-📌 Major APIs
-🔐 Auth APIs
-Register
-POST /api/v1/auth/register
-Body
-{
-  "name": "Rahul",
-  "email": "rahul@gmail.com",
-  "password": "123456",
-  "role": "patient"
-}
-Login
-POST /api/v1/auth/login
-Body
-{
-  "email": "rahul@gmail.com",
-  "password": "123456"
-}
-👨‍⚕️ Doctor APIs
-Create Slot
-POST /api/v1/doctor/slots
-Body
-{
-  "startTime": "2026-05-15T09:10:00.000Z",
-  "endTime": "2026-05-15T09:20:00.000Z"
-}
-Update Slot
-PATCH /api/v1/doctor/slots/:slotId
-Delete Slot
-DELETE /api/v1/doctor/slots/:id
-Get Doctor Slots
-GET /api/v1/doctor/slots/:id
-Get Doctor Appointments
-GET /api/v1/doctor/appointments
-🧑‍💻 Patient APIs
-Get All Doctors
-GET /api/v1/doctor/all
-Get Doctors with Available Slots
-GET /api/v1/doctor/available
-Get Specific Doctor Available Slots
-GET /api/v1/doctor/available/:doctorId
-Book Appointment
-POST /api/v1/appointment/book
-Body
-{
-  "slotId": "slot_id_here"
-}
-🔥 Booking Logic
-
-Uses MongoDB Transactions:
-
-findOneAndUpdate()
-
-to ensure:
-
-One slot = One booking
-No race conditions
-Atomic updates
-🛡️ Security Features
-JWT Authentication
-Password Hashing
-Role-based Access
-Protected Routes
-Rate Limiting
-Docker Isolation
-Nginx Reverse Proxy
-📈 Performance Optimizations
-Redis Cache
-Lean Mongo Queries
-Aggregation Pipelines
-Dockerized Runtime
-Efficient Slot Filtering
-🧪 Future Improvements
-Swagger API Docs
-Unit Testing
-Email Notifications
-Payment Integration
-WebSockets
-Kubernetes Deployment
-Load Balancer
-Auto Scaling
 👨‍💻 Author
-Chandrshekhar Kumar
 
-Backend & DevOps Engineer
-
-Node.js
-MongoDB
-Redis
-Docker
-AWS
-CI/CD
-⭐ Project Status
-
-✅ Production Ready
-✅ Dockerized
-✅ Redis Integrated
-✅ AWS Deployed
-✅ CI/CD Automated
-✅ Scalable Backend Architecture
+Developed by Arun
