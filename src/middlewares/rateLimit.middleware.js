@@ -1,0 +1,63 @@
+import rateLimit from "express-rate-limit";
+
+// GLOBAL API LIMITER
+export const apiLimiter =
+  rateLimit({
+
+    windowMs:
+      15 * 60 * 1000,
+
+    max: 100,
+
+    message: {
+      success: false,
+      message:
+        "Too many requests, please try again later",
+    },
+
+    standardHeaders: true,
+
+    legacyHeaders: false,
+  });
+
+
+// LOGIN LIMITER
+export const authLimiter =
+  rateLimit({
+
+    windowMs:
+      15 * 60 * 1000,
+
+    max: 5,
+
+    message: {
+      success: false,
+      message:
+        "Too many login attempts, please try again after 15 minutes",
+    },
+
+    standardHeaders: true,
+
+    legacyHeaders: false,
+  });
+
+
+// BOOKING LIMITER
+export const bookingLimiter =
+  rateLimit({
+
+    windowMs:
+      5 * 60 * 1000,
+
+    max: 10,
+
+    message: {
+      success: false,
+      message:
+        "Too many booking attempts",
+    },
+
+    standardHeaders: true,
+
+    legacyHeaders: false,
+  });
