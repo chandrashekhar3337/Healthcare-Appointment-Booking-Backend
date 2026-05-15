@@ -1,13 +1,10 @@
 import dotenv from "dotenv";
+
 dotenv.config();
 
 import { createClient } from "redis";
 
 const redisClient = createClient({
-  username: process.env.REDIS_USERNAME,
-
-  password: process.env.REDIS_PASSWORD,
-
   socket: {
     host: process.env.REDIS_HOST,
 
@@ -16,7 +13,7 @@ const redisClient = createClient({
 });
 
 redisClient.on("connect", () => {
-  console.log("Redis Connected");
+  console.log("✅ Redis Connected");
 });
 
 redisClient.on("error", (err) => {
