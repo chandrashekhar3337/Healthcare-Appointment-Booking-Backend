@@ -1,16 +1,16 @@
 import asyncHandler from "../../utils/asyncHandler.js";
 import ApiResponse from "../../utils/ApiResponse.js";
-
+import sendResponse from "../../utils/sendResponse.js";
 import {
   createSlotService,
   getDoctorSlotsService,
   getAllDoctorsService,
   getDoctorAppointmentsService,
   getDoctorsWithAvailableSlotsService,
+  getDoctorAvailableSlotsService,
   deleteSlotService,
-  updateSlotService
+  updateSlotService,
 } from "./doctor.service.js";
-
 // GET DOCTORS WITH AVAILABLE SLOTS
 export const getDoctorsWithAvailableSlots =
   asyncHandler(async (req, res) => {
