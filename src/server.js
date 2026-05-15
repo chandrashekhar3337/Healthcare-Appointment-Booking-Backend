@@ -12,7 +12,7 @@ import {
 } from "./config/redis.js";
 
 const PORT = process.env.PORT || 5000;
-
+console.log("Connecting to database...");
 await connectDB();
 
 await connectRedis();
