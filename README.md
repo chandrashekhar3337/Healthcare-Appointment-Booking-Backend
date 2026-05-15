@@ -18,7 +18,7 @@ This project provides a complete backend system for:
 # 🚀 Live Deployment
 
 ```bash
-http://YOUR_SERVER_IP
+http://100.53.18.226
 ```
 
 ---
