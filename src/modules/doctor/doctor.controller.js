@@ -1,6 +1,5 @@
 import asyncHandler from "../../utils/asyncHandler.js";
 import ApiResponse from "../../utils/ApiResponse.js";
-import sendResponse from "../../utils/sendResponse.js";
 import {
   createSlotService,
   getDoctorSlotsService,
@@ -79,7 +78,7 @@ export const updateSlot =
           req.body
         );
 
-      return sendResponse(res, {
+      return ApiResponse(res, {
 
         statusCode: 200,
 
@@ -160,7 +159,7 @@ export const deleteSlot =
           doctorId
         );
 
-      return sendResponse(res, {
+      return ApiResponse(res, {
         statusCode: 200,
         success: true,
         message:
