@@ -4,6 +4,7 @@ import ApiResponse from "../../utils/ApiResponse.js";
 import {
   registerService,
   loginService,
+  refreshAccessTokenService
 } from "./auth.service.js";
 
 
@@ -52,3 +53,34 @@ export const login = asyncHandler(async (req, res) => {
       )
     );
 });
+
+export const refreshAccessToken =
+  asyncHandler(async (req, res) => {
+
+    const incomingRefreshToken =
+      req.cookies?.refreshToken ||
+      req.body.refreshToken;
+
+    const data =
+      await refreshAccessTokenService(
+        incomingRefreshToken
+      );
+
+    return res
+      .status(200)
+      .cookie(
+        "accessToken",
+        data.accessToken,
+        {
+          httpOnly: true,
+          secure: true,
+        }
+      )
+      .json(
+        new ApiResponse(
+          200,
+          data,
+          "Access token refreshed successfully"
+        )
+      );
+  });

@@ -11,11 +11,16 @@ import validate
 import {
   register,
   login,
+  refreshAccessToken,
 } from "./auth.controller.js";
 
 const router = express.Router();
 
 router.post("/register", registerValidation,validate, register);
 router.post("/login",loginValidation, validate,authLimiter, login);
+router.post(
+  "/refresh-token",
+  refreshAccessToken
+);
 
 export default router;
